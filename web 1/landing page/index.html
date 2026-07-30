@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div class="splashscreen">
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+                <!-- Add your logo SVG here -->
+                <circle cx="31.019" cy="18.93" r="3.555"></circle>
+                <path d="M61.028,23.378a3.555,3.555,0,0,0-6.682-2.432,4.39,4.39,0,0,1-8.25-3,3.555,3.555,0,1,0-6.682-2.432,11.5,11.5,0,0,0,21.614,7.867Z"></path>
+            </svg>
+        </div>
+        <p class="loading-text">Materializing shapes...</p>
+    </div>
+
+    <!-- Main Content -->
+    <header>
+        <div class="header-content">
+            <div class="left-part">
+                <div class="logo">
+                    <a href="/">Home</a>
+                </div>
+            </div>
+            <div class="right-part">
+                <button class="hamburger-btn" aria-label="Open menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section id="intro">
+        <div class="intro-text">
+            <h1>Hi, I'm [Your Name]</h1>
+            <p>Computer Science Student at Telkom University</p>
+            <a href="#work" class="see-projects">&rarr; See my experience</a>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+            <p class="section-label">Career Journey</p>
+            <h2 id="work-title">Work Experience</h2>
+            <p class="section-intro">
+                A collection of roles where I have built digital products, supported learning,
+                and helped create memorable events.
+            </p>
+        </div>
+
+        <ol class="experience-list">
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2026-07">Jul 2026</time>
+                    <span aria-hidden="true">&mdash;</span>
+                    <span>Present</span>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Web Application Developer Intern</h3>
+                            <p class="experience-company">PT Kereta Api Indonesia (Persero)</p>
+                        </div>
+                        <span class="experience-type">Internship</span>
+                    </header>
+                    <p class="experience-location">Yogyakarta, Indonesia</p>
+                    <p class="experience-summary">
+                        DAOP 6 Yogyakarta manages railway operations across the Special Region of
+                        Yogyakarta and parts of Central Java.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Develop and maintain internal web applications that support operational and business workflows.</li>
+                        <li>Collaborate with supervisors and cross-functional teams to translate requirements into system enhancements.</li>
+                        <li>Build responsive interfaces and integrate them with back-end services and databases.</li>
+                        <li>Debug, test, and optimize applications for reliability, performance, and usability.</li>
+                        <li>Contribute to code reviews, technical discussions, and software documentation.</li>
+                    </ul>
+                </article>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2018">2018</time>
+                    <span aria-hidden="true">&mdash;</span>
+                    <span>Present</span>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Event Crew / Usher</h3>
+                            <p class="experience-company">Pita Merah Wedding Organizer</p>
+                        </div>
+                        <span class="experience-type">On-site</span>
+                    </header>
+                    <p class="experience-location">Purwokerto, Central Java, Indonesia</p>
+                    <p class="experience-summary">
+                        A Purwokerto-based event organizer serving weddings, engagements, store
+                        openings, exhibitions, and other events.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Serve as event crew, usher, or guest receptionist based on event requirements.</li>
+                        <li>Welcome guests and manage guest-book and gift-reception activities.</li>
+                        <li>Guide guest flow and support on-site coordination.</li>
+                        <li>Assist with setup and coordinate with team members throughout events.</li>
+                    </ul>
+                </article>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2026-07">Jul 2026</time>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Event Marketing Staff</h3>
+                            <p class="experience-company">Heybee Visual</p>
+                        </div>
+                        <span class="experience-type">On-site</span>
+                    </header>
+                    <p class="experience-location">Purwokerto, Central Java, Indonesia</p>
+                    <p class="experience-summary">
+                        A Purwokerto-based photography brand offering services nationwide.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Distributed brochures and promotional materials to event visitors.</li>
+                        <li>Explained photography services and answered attendee questions.</li>
+                        <li>Engaged visitors at the event booth.</li>
+                        <li>Assisted with booth setup and other on-site activities.</li>
+                    </ul>
+                </article>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2026-06">Jun 2026</time>
+                    <span aria-hidden="true">&mdash;</span>
+                    <time datetime="2026-07">Jul 2026</time>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Full Stack Developer Intern</h3>
+                            <p class="experience-company">Elsotel</p>
+                        </div>
+                        <span class="experience-type">Internship</span>
+                    </header>
+                    <p class="experience-summary">
+                        A Purwokerto hospitality company offering accommodation, dining, meeting
+                        facilities, and event venues.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Developed and maintained the hotel&rsquo;s official website.</li>
+                        <li>Built responsive features with React, TypeScript, Tailwind CSS, and Supabase.</li>
+                        <li>Delivered guest features for room reservations, dining, promotions, the gallery, and user dashboards.</li>
+                        <li>Built administrative tools for rooms, bookings, website content, and hotel operations.</li>
+                        <li>Improved performance, resolved defects, and collaborated with stakeholders on feature delivery.</li>
+                    </ul>
+                </article>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2026-03">Mar 2026</time>
+                    <span aria-hidden="true">&mdash;</span>
+                    <time datetime="2026-07">Jul 2026</time>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Practicum Assistant &ndash; Computer Networks</h3>
+                            <p class="experience-company">Universitas Telkom</p>
+                        </div>
+                        <span class="experience-type">On-site</span>
+                    </header>
+                    <p class="experience-location">Purwokerto, Central Java, Indonesia</p>
+                    <p class="experience-summary">
+                        Supported Computer Networks practicum sessions for approximately 50 students.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Guided students through networking concepts, hands-on configuration, and troubleshooting.</li>
+                        <li>Helped prepare labs, coordinate sessions, support students, and evaluate coursework.</li>
+                        <li>Provided clear technical explanations and step-by-step troubleshooting support.</li>
+                    </ul>
+                </article>
+            </li>
+
+            <li class="experience-item">
+                <div class="experience-period">
+                    <time datetime="2025-07">Jul 2025</time>
+                </div>
+                <article class="experience-card">
+                    <header class="experience-header">
+                        <div>
+                            <h3>Event Marketing Staff</h3>
+                            <p class="experience-company">Heybee Visual</p>
+                        </div>
+                        <span class="experience-type">On-site</span>
+                    </header>
+                    <p class="experience-location">Purwokerto, Central Java, Indonesia</p>
+                    <p class="experience-summary">
+                        A Purwokerto-based photography brand offering services nationwide.
+                    </p>
+                    <ul class="experience-details">
+                        <li>Distributed brochures and promotional materials to event visitors.</li>
+                        <li>Explained photography services and answered attendee questions.</li>
+                        <li>Engaged visitors at the event booth.</li>
+                        <li>Assisted with booth setup and other on-site activities.</li>
+                    </ul>
+                </article>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Name</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
