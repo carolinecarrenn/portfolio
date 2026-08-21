@@ -1,934 +1,1871 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Caroline Carren | Web Developer &amp; System Analyst</title>
-<meta name="description" content="Caroline Carren — Informatics student at Telkom University Purwokerto. Web Application Developer Intern at KAI DAOP 6 Yogyakarta. React, TypeScript, Tailwind CSS, Supabase, QA and system analysis." />
-<meta property="og:title" content="Caroline Carren | Web Developer &amp; System Analyst" />
-<meta property="og:description" content="Informatics student building web applications. Currently interning at PT Kereta Api Indonesia (Persero) DAOP 6 Yogyakarta." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://carolinecarrenn.github.io/portfolio/" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<style>
-:root{
---bg:#0f0b14;
---bg-soft:#17111f;
---card:rgba(255,255,255,.075);
---card-strong:rgba(255,255,255,.12);
---line:rgba(255,255,255,.13);
---text:#fffafc;
---muted:#d9cfdf;
---pink:#f5a8d7;
---purple:#c8a7ff;
---blue:#a6d7ff;
---gradient:linear-gradient(135deg,#f5a8d7 0%, #c8a7ff 52%, #a6d7ff 100%);
---shadow:0 24px 70px rgba(0,0,0,.28);
---radius:30px;
-}
-body.light{
---bg:#fff8fc;
---bg-soft:#f6f0ff;
---card:rgba(255,255,255,.76);
---card-strong:rgba(255,255,255,.95);
---line:rgba(140,110,170,.16);
---text:#241b2c;
---muted:#6d6177;
---shadow:0 20px 55px rgba(164,125,196,.14);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-min-height:100vh;
-font-family:'Manrope',sans-serif;
-color:var(--text);
-background:
-radial-gradient(circle at 10% 12%,rgba(245,168,215,.22),transparent 25%),
-radial-gradient(circle at 86% 18%,rgba(166,215,255,.17),transparent 26%),
-radial-gradient(circle at 50% 92%,rgba(200,167,255,.18),transparent 28%),
-linear-gradient(145deg,var(--bg),var(--bg-soft));
-overflow-x:hidden;
-transition:.35s ease;
-}
-#starCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85;}
-.scroll-progress{position:fixed;top:0;left:0;width:0%;height:4px;background:var(--gradient);z-index:9999;}
-.cursor-glow{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.10),transparent 62%);pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:screen;z-index:0;}
-.navbar{position:fixed;top:0;left:0;width:100%;z-index:999;padding:18px 7%;display:flex;align-items:center;justify-content:space-between;background:rgba(15,11,20,.52);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);}
-body.light .navbar{background:rgba(255,255,255,.78);}
-.brand{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:var(--text);text-decoration:none;}
-.nav-menu{display:flex;align-items:center;gap:24px;list-style:none;}
-.nav-menu a{color:var(--text);text-decoration:none;font-size:.92rem;font-weight:800;opacity:.82;position:relative;transition:.25s ease;}
-.nav-menu a::after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;border-radius:99px;background:var(--gradient);transition:.25s ease;}
-.nav-menu a:hover,.nav-menu a.active{opacity:1;}
-.nav-menu a:hover::after,.nav-menu a.active::after{width:100%;}
-.nav-actions{display:flex;align-items:center;gap:10px;}
-.icon-btn{width:46px;height:46px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;display:grid;place-items:center;transition:.25s ease;}
-.icon-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(200,167,255,.18);}
-.menu-toggle{display:none;}
-.container{width:min(1200px,calc(100% - 36px));margin:auto;position:relative;z-index:2;}
-section{position:relative;z-index:2;padding:105px 0 20px;}
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;}
-.hero-card{display:grid;grid-template-columns:360px 1fr;gap:38px;align-items:center;padding:38px;border:1px solid var(--line);border-radius:38px;background:var(--card);backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden;position:relative;}
-.hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 10%,rgba(245,168,215,.18),transparent 28%),radial-gradient(circle at 92% 88%,rgba(166,215,255,.14),transparent 28%);pointer-events:none;}
-.photo-area,.hero-content{position:relative;z-index:1;}
-.photo-area{width:100%;}
-.photo-frame{width:min(100%,320px);aspect-ratio:1/1.14;margin:auto;padding:8px;border-radius:36px;background:var(--gradient);box-shadow:0 20px 50px rgba(200,167,255,.22);position:relative;overflow:visible;animation:floaty 5.5s ease-in-out infinite;}
-.photo-inner{width:100%;height:100%;border-radius:29px;border:3px solid rgba(255,255,255,.82);overflow:hidden;position:relative;background:linear-gradient(135deg,rgba(245,168,215,.42),rgba(166,215,255,.42));display:grid;place-items:center;}
-.photo-inner img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:2;}
-.photo-inner img.hide{display:none;}
-.photo-placeholder{position:absolute;inset:0;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:4.8rem;font-weight:700;color:#fff;z-index:1;}
-.float-chip{position:absolute;z-index:5;background:rgba(255,255,255,.96);color:#6b4b74;padding:11px 15px;border-radius:999px;box-shadow:0 14px 34px rgba(0,0,0,.12);font-size:.82rem;font-weight:900;white-space:nowrap;}
-.float-chip.top{right:-8px;top:16px;}
-.float-chip.bottom{left:-8px;bottom:22px;}
-.badge{display:inline-flex;align-items:center;gap:10px;padding:10px 15px;border-radius:999px;background:var(--card-strong);border:1px solid var(--line);color:var(--muted);font-weight:800;font-size:.9rem;margin-bottom:18px;}
-.badge .dot{width:8px;height:8px;border-radius:50%;background:#82e7a6;box-shadow:0 0 0 8px rgba(130,231,166,.12);}
-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,7vw,5.8rem);line-height:.94;margin-bottom:12px;font-weight:700;}
-.gradient-text,.section-title,.stat-number{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.typing{min-height:34px;font-size:clamp(1rem,2vw,1.3rem);font-weight:900;margin-bottom:14px;}
-.hero-desc,.section-sub,.muted{color:var(--muted);line-height:1.9;}
-.hero-desc{max-width:760px;font-size:1.02rem;margin-bottom:24px;}
-.buttons{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px;}
-.btn{border:none;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:13px 22px;border-radius:17px;font-weight:900;cursor:pointer;transition:.25s ease;color:var(--text);background:var(--card-strong);border:1px solid var(--line);font-family:inherit;}
-.btn.primary{background:var(--gradient);color:#fff;border-color:transparent;box-shadow:0 16px 38px rgba(200,167,255,.18);}
-.btn:hover{transform:translateY(-3px);}
-.socials{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
-.socials a{width:48px;height:48px;border-radius:16px;background:var(--card-strong);border:1px solid var(--line);color:var(--text);display:grid;place-items:center;text-decoration:none;transition:.25s ease;}
-.socials a:hover{transform:translateY(-4px);color:var(--pink);}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.stat{text-align:center;background:var(--card-strong);border:1px solid var(--line);padding:18px 12px;border-radius:24px;}
-.stat-number{display:block;font-family:'Cormorant Garamond',serif;font-size:2.3rem;line-height:1;font-weight:700;}
-.stat small{color:var(--muted);font-weight:800;}
-.section-head{text-align:center;margin-bottom:38px;}
-.kicker{display:inline-flex;padding:8px 14px;border-radius:999px;background:var(--card-strong);border:1px solid var(--line);color:var(--muted);font-size:.84rem;font-weight:900;margin-bottom:14px;}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:700;margin-bottom:12px;}
-.grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(14px);box-shadow:var(--shadow);padding:24px;transition:.25s ease;height:100%;}
-.card:hover{transform:translateY(-7px);border-color:rgba(245,168,215,.30);}
-.info-item{display:flex;gap:14px;align-items:flex-start;background:var(--card-strong);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:14px;}
-.info-item:last-child{margin-bottom:0;}
-.info-item i{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:var(--gradient);color:#fff;flex:none;}
-.info-item span{color:var(--muted);}
-.tabs,.filter-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:22px;}
-.tabs.left{justify-content:flex-start;}
-.pill{border:none;border-radius:999px;padding:11px 16px;background:var(--card-strong);border:1px solid var(--line);color:var(--text);font-weight:900;cursor:pointer;transition:.25s ease;font-family:inherit;}
-.pill:hover,.pill.active{background:var(--gradient);color:#fff;border-color:transparent;transform:translateY(-2px);}
-.panel{display:none;color:var(--muted);line-height:1.95;animation:fadeUp .3s ease;}
-.panel.active{display:block;}
-.timeline{position:relative;padding-left:24px;border-left:2px dashed var(--line);}
-.timeline-item{position:relative;padding-bottom:26px;}
-.timeline-item:last-child{padding-bottom:0;}
-.timeline-item::before{content:"";position:absolute;left:-32px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--gradient);box-shadow:0 0 24px rgba(200,167,255,.35);}
-.date{display:inline-block;padding:7px 12px;border-radius:999px;background:var(--card-strong);border:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:900;margin-bottom:10px;}
-.date.now{background:var(--gradient);color:#fff;border-color:transparent;}
-h3,h4{font-weight:900;margin-bottom:6px;}
-.sub{color:var(--purple);font-weight:900;margin-bottom:10px;}
-body.light .sub{color:#8a6daf;}
-.list{padding-left:18px;color:var(--muted);line-height:1.9;margin-top:12px;}
-.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;}
-.tags span{padding:8px 12px;border-radius:999px;background:var(--card-strong);border:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:900;}
-.exp-item.hide,.project-card.hide,.cert-card.hide{display:none;}
-.skill-panel{display:none;}
-.skill-panel.active{display:block;animation:fadeUp .3s ease;}
-.skill-group{margin-bottom:22px;}
-.skill-group:last-child{margin-bottom:0;}
-.skill-group h4{margin-bottom:12px;font-size:.95rem;letter-spacing:.02em;}
-.chips{display:flex;flex-wrap:wrap;gap:10px;}
-.chips span{padding:10px 14px;border-radius:14px;background:var(--card-strong);border:1px solid var(--line);color:var(--text);font-size:.86rem;font-weight:800;transition:.25s ease;}
-.chips span:hover{border-color:rgba(245,168,215,.35);transform:translateY(-2px);}
-.chips span.key{background:var(--gradient);color:#fff;border-color:transparent;}
-.search-box{width:min(100%,390px);min-height:50px;border-radius:17px;border:1px solid var(--line);background:var(--card-strong);color:var(--text);outline:none;padding:0 16px;font-family:inherit;font-weight:800;}
-.search-box::placeholder{color:rgba(217,207,223,.75);}
-body.light .search-box::placeholder{color:rgba(109,97,119,.75);}
-.search-row{display:flex;justify-content:center;margin-bottom:18px;}
-.project-card,.cert-card{position:relative;overflow:hidden;}
-.project-card{cursor:pointer;}
-.project-card::before,.cert-card::before{content:"";position:absolute;width:150px;height:150px;right:-48px;top:-48px;border-radius:50%;background:radial-gradient(circle,rgba(245,168,215,.20),transparent 70%);}
-.project-icon,.cert-icon{width:60px;height:60px;border-radius:20px;background:var(--gradient);display:grid;place-items:center;color:#fff;font-size:1.35rem;margin-bottom:16px;position:relative;z-index:1;}
-.project-action{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.88rem;font-weight:900;color:var(--text);opacity:.9;position:relative;z-index:1;}
-.project-action i{transition:.25s ease;}
-.project-card:hover .project-action i{transform:translateX(4px);}
-.project-card h3,.project-card p,.project-card .tags,.project-action,.cert-card h3,.cert-card p,.cert-card small{position:relative;z-index:1;}
-.cert-head{display:flex;gap:14px;align-items:flex-start;position:relative;z-index:1;margin-bottom:12px;}
-.cert-icon{flex:none;background:var(--card-strong);border:1px solid var(--line);color:var(--pink);margin-bottom:0;}
-.modal-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
-.modal-links a{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border-radius:15px;background:var(--card-strong);border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:900;font-size:.88rem;transition:.25s ease;}
-.modal-links a:hover{transform:translateY(-2px);border-color:rgba(245,168,215,.35);}
-.contact-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;}
-.toast{position:fixed;right:22px;bottom:24px;padding:14px 18px;border-radius:18px;background:var(--card-strong);border:1px solid var(--line);color:var(--text);box-shadow:var(--shadow);backdrop-filter:blur(16px);z-index:9999;opacity:0;transform:translateY(20px);pointer-events:none;transition:.3s ease;font-weight:900;}
-.toast.show{opacity:1;transform:translateY(0);}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.54);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:9998;padding:18px;}
-.modal.show{display:flex;}
-.modal-content{width:min(620px,100%);max-height:88vh;overflow-y:auto;background:var(--bg-soft);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px;animation:modalIn .25s ease;}
-body.light .modal-content{background:#fff;}
-.modal-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px;}
-.close-modal{background:var(--card-strong);color:var(--text);border:1px solid var(--line);width:42px;height:42px;border-radius:14px;cursor:pointer;flex:none;font-family:inherit;}
-.scroll-top{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border:none;border-radius:18px;background:var(--gradient);color:#fff;cursor:pointer;opacity:0;visibility:hidden;transition:.25s ease;z-index:999;box-shadow:0 16px 36px rgba(200,167,255,.22);}
-.scroll-top.show{opacity:1;visibility:visible;}
-footer{position:relative;z-index:2;text-align:center;padding:36px 18px 54px;color:var(--muted);font-weight:700;}
-.reveal{opacity:0;transform:translateY(30px);transition:.75s ease;}
-.reveal.show{opacity:1;transform:translateY(0);}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--pink);outline-offset:3px;}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-@media(max-width:1050px){
-.nav-menu{position:fixed;top:82px;left:18px;right:18px;display:none;flex-direction:column;align-items:flex-start;padding:20px;border-radius:24px;background:var(--bg-soft);border:1px solid var(--line);box-shadow:var(--shadow);}
-.nav-menu.show{display:flex;}
-.menu-toggle{display:grid;}
-.hero-card,.grid-2,.contact-box{grid-template-columns:1fr;}
-.grid-3{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:640px){
-.navbar{padding:14px 18px;}
-.hero-card{padding:24px;}
-.grid-3,.stats{grid-template-columns:1fr;}
-section{padding:80px 0 16px;}
-.float-chip{font-size:.74rem;padding:9px 12px;}
-.cursor-glow{display:none;}
-}
-@media(prefers-reduced-motion:reduce){
-*{animation:none!important;transition:none!important;}
-html{scroll-behavior:auto;}
-.reveal{opacity:1;transform:none;}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caroline Carren | Portfolio</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0b14;
+      --bg-soft:#17111f;
+      --card:rgba(255,255,255,.075);
+      --card-strong:rgba(255,255,255,.12);
+      --line:rgba(255,255,255,.13);
+      --text:#fffafc;
+      --muted:#d9cfdf;
+      --pink:#f5a8d7;
+      --purple:#c8a7ff;
+      --blue:#a6d7ff;
+      --gradient:linear-gradient(135deg,#f5a8d7 0%, #c8a7ff 52%, #a6d7ff 100%);
+      --shadow:0 24px 70px rgba(0,0,0,.28);
+      --radius:30px;
+    }
+
+    body.light{
+      --bg:#fff8fc;
+      --bg-soft:#f6f0ff;
+      --card:rgba(255,255,255,.76);
+      --card-strong:rgba(255,255,255,.95);
+      --line:rgba(140,110,170,.16);
+      --text:#241b2c;
+      --muted:#6d6177;
+      --shadow:0 20px 55px rgba(164,125,196,.14);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:'Manrope',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 12%,rgba(245,168,215,.22),transparent 25%),
+        radial-gradient(circle at 86% 18%,rgba(166,215,255,.17),transparent 26%),
+        radial-gradient(circle at 50% 92%,rgba(200,167,255,.18),transparent 28%),
+        linear-gradient(145deg,var(--bg),var(--bg-soft));
+      overflow-x:hidden;
+      transition:.35s ease;
+    }
+
+    #starCanvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      pointer-events:none;
+      opacity:.85;
+    }
+
+    .scroll-progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:4px;
+      background:var(--gradient);
+      z-index:9999;
+    }
+
+    .cursor-glow{
+      position:fixed;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.10),transparent 62%);
+      pointer-events:none;
+      transform:translate(-50%,-50%);
+      mix-blend-mode:screen;
+      z-index:0;
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:999;
+      padding:18px 7%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:rgba(15,11,20,.52);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+
+    body.light .navbar{
+      background:rgba(255,255,255,.78);
+    }
+
+    .brand{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.9rem;
+      font-weight:700;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .nav-menu{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      list-style:none;
+    }
+
+    .nav-menu a{
+      color:var(--text);
+      text-decoration:none;
+      font-size:.92rem;
+      font-weight:800;
+      opacity:.82;
+      position:relative;
+      transition:.25s ease;
+    }
+
+    .nav-menu a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0;
+      height:2px;
+      border-radius:99px;
+      background:var(--gradient);
+      transition:.25s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active{
+      opacity:1;
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after{
+      width:100%;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .icon-btn{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition:.25s ease;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 28px rgba(200,167,255,.18);
+    }
+
+    .menu-toggle{
+      display:none;
+    }
+
+    .container{
+      width:min(1200px,calc(100% - 36px));
+      margin:auto;
+      position:relative;
+      z-index:2;
+    }
+
+    section{
+      position:relative;
+      z-index:2;
+      padding:105px 0 20px;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:110px;
+    }
+
+    .hero-card{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:38px;
+      align-items:center;
+      padding:38px;
+      border:1px solid var(--line);
+      border-radius:38px;
+      background:var(--card);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 8% 10%,rgba(245,168,215,.18),transparent 28%),
+        radial-gradient(circle at 92% 88%,rgba(166,215,255,.14),transparent 28%);
+      pointer-events:none;
+    }
+
+    .photo-area,
+    .hero-content{
+      position:relative;
+      z-index:1;
+    }
+
+    .photo-area{
+      width:100%;
+    }
+
+    .photo-frame{
+      width:min(100%,320px);
+      aspect-ratio:1/1.14;
+      margin:auto;
+      padding:8px;
+      border-radius:36px;
+      background:var(--gradient);
+      box-shadow:0 20px 50px rgba(200,167,255,.22);
+      position:relative;
+      overflow:visible;
+      animation:floaty 5.5s ease-in-out infinite;
+    }
+
+    .photo-inner{
+      width:100%;
+      height:100%;
+      border-radius:29px;
+      border:3px solid rgba(255,255,255,.82);
+      overflow:hidden;
+      position:relative;
+      background:linear-gradient(135deg,rgba(245,168,215,.42),rgba(166,215,255,.42));
+      display:grid;
+      place-items:center;
+    }
+
+    .photo-inner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      position:relative;
+      z-index:2;
+    }
+
+    .photo-inner img.hide{
+      display:none;
+    }
+
+    .photo-placeholder{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:4.8rem;
+      font-weight:700;
+      color:#fff;
+      z-index:1;
+    }
+
+    .float-chip{
+      position:absolute;
+      z-index:5;
+      background:rgba(255,255,255,.96);
+      color:#6b4b74;
+      padding:11px 15px;
+      border-radius:999px;
+      box-shadow:0 14px 34px rgba(0,0,0,.12);
+      font-size:.82rem;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .float-chip.top{
+      right:-8px;
+      top:16px;
+    }
+
+    .float-chip.bottom{
+      left:-8px;
+      bottom:22px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 15px;
+      border-radius:999px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-weight:800;
+      font-size:.9rem;
+      margin-bottom:18px;
+    }
+
+    .badge .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#82e7a6;
+      box-shadow:0 0 0 8px rgba(130,231,166,.12);
+    }
+
+    h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(3.2rem,7vw,5.8rem);
+      line-height:.94;
+      margin-bottom:12px;
+      font-weight:700;
+    }
+
+    .gradient-text,
+    .section-title,
+    .stat-number{
+      background:var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .typing{
+      min-height:34px;
+      font-size:clamp(1rem,2vw,1.3rem);
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .hero-desc,
+    .section-sub,
+    .muted{
+      color:var(--muted);
+      line-height:1.9;
+    }
+
+    .hero-desc{
+      max-width:760px;
+      font-size:1.02rem;
+      margin-bottom:24px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:22px;
+    }
+
+    .btn{
+      border:none;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:50px;
+      padding:13px 22px;
+      border-radius:17px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.25s ease;
+      color:var(--text);
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      font-family:inherit;
+    }
+
+    .btn.primary{
+      background:var(--gradient);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 16px 38px rgba(200,167,255,.18);
+    }
+
+    .btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .socials{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:24px;
+    }
+
+    .socials a{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--text);
+      display:grid;
+      place-items:center;
+      text-decoration:none;
+      transition:.25s ease;
+    }
+
+    .socials a:hover{
+      transform:translateY(-4px);
+      color:var(--pink);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .stat{
+      text-align:center;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      padding:18px 12px;
+      border-radius:24px;
+    }
+
+    .stat-number{
+      display:block;
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.3rem;
+      line-height:1;
+      font-weight:700;
+    }
+
+    .stat small{
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    .section-head{
+      text-align:center;
+      margin-bottom:38px;
+    }
+
+    .kicker{
+      display:inline-flex;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.84rem;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .section-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.4rem,5vw,4rem);
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
+      padding:24px;
+      transition:.25s ease;
+      height:100%;
+    }
+
+    .card:hover{
+      transform:translateY(-7px);
+      border-color:rgba(245,168,215,.30);
+    }
+
+    .info-item{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .info-item:last-child{
+      margin-bottom:0;
+    }
+
+    .info-item i{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:var(--gradient);
+      color:#fff;
+      flex:none;
+    }
+
+    .info-item span{
+      color:var(--muted);
+    }
+
+    .tabs,
+    .filter-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-bottom:22px;
+    }
+
+    .tabs.left{
+      justify-content:flex-start;
+    }
+
+    .pill{
+      border:none;
+      border-radius:999px;
+      padding:11px 16px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+      transition:.25s ease;
+      font-family:inherit;
+    }
+
+    .pill:hover,
+    .pill.active{
+      background:var(--gradient);
+      color:#fff;
+      border-color:transparent;
+      transform:translateY(-2px);
+    }
+
+    .panel{
+      display:none;
+      color:var(--muted);
+      line-height:1.95;
+      animation:fadeUp .3s ease;
+    }
+
+    .panel.active{
+      display:block;
+    }
+
+    .timeline{
+      position:relative;
+      padding-left:24px;
+      border-left:2px dashed var(--line);
+    }
+
+    .timeline-item{
+      position:relative;
+      padding-bottom:26px;
+    }
+
+    .timeline-item:last-child{
+      padding-bottom:0;
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-32px;
+      top:6px;
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      background:var(--gradient);
+      box-shadow:0 0 24px rgba(200,167,255,.35);
+    }
+
+    .date{
+      display:inline-block;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.82rem;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    h3,h4{
+      font-weight:900;
+      margin-bottom:6px;
+    }
+
+    .sub{
+      color:var(--purple);
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    body.light .sub{
+      color:#8a6daf;
+    }
+
+    .list{
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.9;
+      margin-top:12px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:16px;
+    }
+
+    .tags span{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.82rem;
+      font-weight:900;
+    }
+
+    .exp-item.hide,
+    .project-card.hide,
+    .cert-card.hide{
+      display:none;
+    }
+
+    .skill-panel{
+      display:none;
+    }
+
+    .skill-panel.active{
+      display:block;
+      animation:fadeUp .3s ease;
+    }
+
+    .skill-item{
+      margin-bottom:18px;
+    }
+
+    .skill-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:900;
+      margin-bottom:8px;
+    }
+
+    .skill-bar{
+      height:12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.09);
+      overflow:hidden;
+    }
+
+    body.light .skill-bar{
+      background:rgba(120,90,170,.12);
+    }
+
+    .skill-fill{
+      width:0;
+      height:100%;
+      border-radius:999px;
+      background:var(--gradient);
+      transition:width 1.4s ease;
+    }
+
+    .search-box{
+      width:min(100%,390px);
+      min-height:50px;
+      border-radius:17px;
+      border:1px solid var(--line);
+      background:var(--card-strong);
+      color:var(--text);
+      outline:none;
+      padding:0 16px;
+      font-family:inherit;
+      font-weight:800;
+    }
+
+    .search-box::placeholder{
+      color:rgba(217,207,223,.75);
+    }
+
+    .project-card,
+    .cert-card{
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+
+    .project-card::before,
+    .cert-card::before{
+      content:"";
+      position:absolute;
+      width:150px;
+      height:150px;
+      right:-48px;
+      top:-48px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(245,168,215,.20),transparent 70%);
+    }
+
+    .project-icon,
+    .cert-icon{
+      width:60px;
+      height:60px;
+      border-radius:20px;
+      background:var(--gradient);
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:1.35rem;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .project-action{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:18px;
+      font-size:.88rem;
+      font-weight:900;
+      color:var(--text);
+      opacity:.9;
+      position:relative;
+      z-index:1;
+    }
+
+    .project-action i{
+      transition:.25s ease;
+    }
+
+    .project-card:hover .project-action i{
+      transform:translateX(4px);
+    }
+
+    .project-card h3,
+    .project-card p,
+    .project-card .tags,
+    .project-action,
+    .cert-card h3,
+    .cert-card p,
+    .cert-card small{
+      position:relative;
+      z-index:1;
+    }
+
+    .cert-head{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      position:relative;
+      z-index:1;
+      margin-bottom:12px;
+    }
+
+    .cert-icon{
+      flex:none;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--pink);
+      margin-bottom:0;
+    }
+
+    .contact-box{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:22px;
+    }
+
+    .toast{
+      position:fixed;
+      right:22px;
+      bottom:24px;
+      padding:14px 18px;
+      border-radius:18px;
+      background:var(--card-strong);
+      border:1px solid var(--line);
+      color:var(--text);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      z-index:9999;
+      opacity:0;
+      transform:translateY(20px);
+      pointer-events:none;
+      transition:.3s ease;
+      font-weight:900;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.54);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9998;
+      padding:18px;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-content{
+      width:min(620px,100%);
+      background:var(--bg-soft);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:26px;
+      animation:modalIn .25s ease;
+    }
+
+    body.light .modal-content{
+      background:#fff;
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      margin-bottom:14px;
+    }
+
+    .close-modal{
+      border:none;
+      background:var(--card-strong);
+      color:var(--text);
+      border:1px solid var(--line);
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      cursor:pointer;
+    }
+
+    .scroll-top{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:56px;
+      height:56px;
+      border:none;
+      border-radius:18px;
+      background:var(--gradient);
+      color:#fff;
+      cursor:pointer;
+      opacity:0;
+      visibility:hidden;
+      transition:.25s ease;
+      z-index:999;
+      box-shadow:0 16px 36px rgba(200,167,255,.22);
+    }
+
+    .scroll-top.show{
+      opacity:1;
+      visibility:visible;
+    }
+
+    footer{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:36px 18px 54px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(30px);
+      transition:.75s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-14px)}
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @keyframes modalIn{
+      from{opacity:0;transform:translateY(18px) scale(.98)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+
+    @media(max-width:1050px){
+      .nav-menu{
+        position:fixed;
+        top:82px;
+        left:18px;
+        right:18px;
+        display:none;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px;
+        border-radius:24px;
+        background:var(--bg-soft);
+        border:1px solid var(--line);
+        box-shadow:var(--shadow);
+      }
+
+      .nav-menu.show{
+        display:flex;
+      }
+
+      .menu-toggle{
+        display:grid;
+      }
+
+      .hero-card,
+      .grid-2,
+      .contact-box{
+        grid-template-columns:1fr;
+      }
+
+      .grid-3{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:640px){
+      .navbar{
+        padding:14px 18px;
+      }
+
+      .hero-card{
+        padding:24px;
+      }
+
+      .grid-3,
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .buttons{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .float-chip.top{right:8px;}
+      .float-chip.bottom{left:8px;}
+    }
+  </style>
 </head>
 <body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="starCanvas"></canvas>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-<div class="scroll-progress" id="progress"></div>
-<canvas id="starCanvas"></canvas>
-<div class="cursor-glow" id="glow"></div>
+  <nav class="navbar">
+    <a href="#home" class="brand">Caroline Carren</a>
 
-<nav class="navbar">
-  <a href="#home" class="brand">Caroline Carren</a>
-  <ul class="nav-menu" id="navMenu">
-    <li><a href="#about">About</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-actions">
-    <button class="icon-btn" id="themeBtn" aria-label="Switch colour theme"><i class="fa-solid fa-moon"></i></button>
-    <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
-  </div>
-</nav>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#competition">Competition</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container">
-    <div class="hero-card">
-      <div class="photo-area">
-        <div class="photo-frame">
-          <div class="photo-inner">
-            <img src="profile.jpg.png" alt="Caroline Carren" id="profileImg" onerror="this.classList.add('hide')">
-            <div class="photo-placeholder">CC</div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-card reveal">
+          <div class="photo-area">
+            <div class="photo-frame">
+              <div class="photo-inner">
+                <div class="photo-placeholder">CC</div>
+                <img id="profilePhoto" src="profile.jpg" alt="Caroline Carren">
+              </div>
+              <div class="float-chip top">Fast Learner</div>
+              <div class="float-chip bottom">Internship Ready</div>
+            </div>
           </div>
-          <span class="float-chip top">React &amp; TypeScript</span>
-          <span class="float-chip bottom">QA &amp; Documentation</span>
-        </div>
-      </div>
-      <div class="hero-content">
-        <div class="badge"><span class="dot"></span> Web Application Developer Intern @ KAI DAOP 6 Yogyakarta</div>
-        <h1>Hi, I'm <span class="gradient-text">Caroline</span></h1>
-        <div class="typing gradient-text" id="typing"></div>
-        <p class="hero-desc">
-          Final-year Informatics student at Telkom University Purwokerto who builds web applications end to end —
-          from requirement analysis and documentation through to React interfaces, database integration, and testing.
-          I've shipped a production hotel website with React, TypeScript, Tailwind CSS, and Supabase, and I'm currently
-          developing internal operational tools at PT Kereta Api Indonesia (Persero).
-        </p>
-        <div class="buttons">
-          <a href="#projects" class="btn primary"><i class="fa-solid fa-folder-open"></i> View projects</a>
-          <a href="#contact" class="btn"><i class="fa-solid fa-paper-plane"></i> Get in touch</a>
-          <a href="Caroline_Carren_CV.pdf" class="btn" download><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
-        </div>
-        <div class="socials">
-          <a href="https://github.com/carolinecarrenn" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/caroline-carren-a1aa51346" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://www.instagram.com/carolinecarrenn/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="mailto:carolinecarren22@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <div class="stats">
-          <div class="stat"><span class="stat-number" data-target="8">0</span><small>Projects</small></div>
-          <div class="stat"><span class="stat-number" data-target="6">0</span><small>Certifications</small></div>
-          <div class="stat"><span class="stat-number" data-target="3.87" data-decimal="2">0</span><small>GPA / 4.00</small></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">About me</span>
-      <h2 class="section-title">Building, testing, documenting</h2>
-      <p class="section-sub">Three tabs, three angles on how I work.</p>
-    </div>
-    <div class="grid-2">
-      <div class="card reveal">
-        <div class="tabs left">
-          <button class="pill active" data-tab="p1">Profile</button>
-          <button class="pill" data-tab="p2">What I do</button>
-          <button class="pill" data-tab="p3">Availability</button>
-        </div>
-        <div class="panel active" id="p1">
-          I'm a final-year (7th-semester) Informatics student at Telkom University Purwokerto. Over the past year I've moved
-          from academic projects into real development work — two consecutive internships building web applications for a
-          hospitality company and a state-owned railway operator. Alongside development, I write the documentation most
-          teams put off: requirements, system design, test cases, and user manuals.
-        </div>
-        <div class="panel" id="p2">
-          Day to day I work across the stack: React and TypeScript on the frontend, Tailwind CSS for interfaces, and
-          Supabase or MySQL for data. I also handle requirement analysis, business process mapping, manual testing, and
-          UAT documentation. My final-year research sits in computer vision — predicting human fall movement phases from
-          skeleton pose data using YOLO Pose.
-        </div>
-        <div class="panel" id="p3">
-          Currently interning at KAI DAOP 6 Yogyakarta and graduating in 2027. I'm open to conversations about web
-          development, quality assurance, and system analysis roles — internship or entry-level. Comfortable working
-          independently and in teams, and happy to take on the documentation nobody else wants.
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="info-item"><i class="fa-solid fa-user"></i><div><h4>Full name</h4><span>Caroline Carren Aurelia R</span></div></div>
-        <div class="info-item"><i class="fa-solid fa-graduation-cap"></i><div><h4>Status</h4><span>7th-semester Informatics student · Expected graduation 2027</span></div></div>
-        <div class="info-item"><i class="fa-solid fa-bullseye"></i><div><h4>Target roles</h4><span>Web Developer · System Analyst · Quality Assurance</span></div></div>
-        <div class="info-item"><i class="fa-solid fa-location-dot"></i><div><h4>Based in</h4><span>Purwokerto, Indonesia · currently in Yogyakarta</span></div></div>
-        <div class="info-item"><i class="fa-solid fa-code"></i><div><h4>Main stack</h4><span>React · TypeScript · Tailwind CSS · Supabase · SQL</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="hero-content">
+            <div class="badge"><span class="dot"></span> Informatics Student • Telkom University • Open to Internship</div>
+            <h1>Hi, I’m <span class="gradient-text">Caroline</span></h1>
+            <div class="typing" id="typingText"></div>
+            <p class="hero-desc">
+              Informatics student with growing interests in Artificial Intelligence, Computer Vision, data analysis, and software development. I enjoy learning through academic projects, research, business innovation, and collaborative technology-based work.
+            </p>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Education</span>
-      <h2 class="section-title">Academic background</h2>
-      <p class="section-sub">Where the foundations came from.</p>
-    </div>
-    <div class="card reveal">
-      <div class="timeline">
-        <div class="timeline-item">
-          <span class="date now">Sep 2023 – Present</span>
-          <h3>Telkom University Purwokerto</h3>
-          <div class="sub">Bachelor's Degree in Informatics Engineering · GPA 3.87 / 4.00</div>
-          <p class="muted">Coursework in algorithms, data structures, web programming, computer networks, database systems, artificial intelligence, and software engineering.</p>
-          <div class="tags">
-            <span>Database Systems</span><span>Web Programming</span><span>Computer Networks</span>
-            <span>Artificial Intelligence</span><span>Software Engineering</span>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <span class="date">2020 – 2023</span>
-          <h3>State Senior High School 1 Purwokerto</h3>
-          <div class="sub">Science Major</div>
-          <p class="muted">Mathematics, physics, chemistry, and biology — the groundwork for analytical and systematic thinking.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="buttons">
+              <a href="#projects" class="btn primary"><i class="fas fa-sparkles"></i> View Projects</a>
+              <a href="#contact" class="btn"><i class="fas fa-paper-plane"></i> Contact Me</a>
+              <a class="btn" href="Caroline_Carren_CV.pdf" download><i class="fas fa-download"></i> Download CV</a>
+            </div>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Experience</span>
-      <h2 class="section-title">Work &amp; project experience</h2>
-      <p class="section-sub">Filter by category to jump to what's relevant.</p>
-    </div>
-    <div class="filter-row reveal">
-      <button class="pill active" data-exp="all">All</button>
-      <button class="pill" data-exp="professional">Professional</button>
-      <button class="pill" data-exp="academic">Academic</button>
-      <button class="pill" data-exp="event">Event</button>
-    </div>
-    <div class="card reveal">
-      <div class="timeline">
+            <div class="socials">
+              <a href="https://github.com/carolinecarrenn" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/caroline-carren-a1aa51346" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.instagram.com/carolinecarrenn/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="mailto:carolinecarren22@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
 
-        <div class="timeline-item exp-item" data-cat="professional">
-          <span class="date now">Jul 2026 – Present</span>
-          <h3>Web Application Developer Intern</h3>
-          <div class="sub">PT Kereta Api Indonesia (Persero) – DAOP 6 Yogyakarta</div>
-          <p class="muted">Building internal web applications that support daily operational and business processes across the regional office.</p>
-          <ul class="list">
-            <li>Develop and maintain internal web applications used by operational teams</li>
-            <li>Build responsive frontend interfaces and integrate them with backend services and databases</li>
-            <li>Analyse requirements with supervisors and cross-functional teams, then implement system enhancements</li>
-            <li>Debug, test, and optimise performance to improve application reliability</li>
-            <li>Take part in code reviews, technical discussions, and software documentation</li>
-          </ul>
-          <div class="tags"><span>Web Development</span><span>Frontend</span><span>Backend Integration</span><span>Testing</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="professional">
-          <span class="date">Jun 2026 – Jul 2026</span>
-          <h3>Full Stack Developer Intern</h3>
-          <div class="sub">Elsotel Purwokerto</div>
-          <p class="muted">Developed and maintained the company's official hotel website, front to back.</p>
-          <ul class="list">
-            <li>Built the site with React, TypeScript, Tailwind CSS, and Supabase</li>
-            <li>Implemented customer-facing modules: room reservations, restaurant, promotions, gallery, and user dashboard</li>
-            <li>Developed admin features for managing rooms, bookings, website content, and hotel operations</li>
-            <li>Optimised performance, resolved bugs, and shipped features with stakeholder feedback</li>
-          </ul>
-          <div class="tags"><span>React.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>Full Stack</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="academic">
-          <span class="date">Feb 2026 – Jun 2026</span>
-          <h3>Practicum Assistant – Computer Networks</h3>
-          <div class="sub">Telkom University Purwokerto</div>
-          <p class="muted">Assisted teaching Computer Networks practicum sessions for over 50 students.</p>
-          <ul class="list">
-            <li>Guided students through networking concepts, practical configurations, and troubleshooting</li>
-            <li>Coordinated practicum preparation, class logistics, and student assistance</li>
-            <li>Supported instructors in evaluation activities and technical explanation</li>
-          </ul>
-          <div class="tags"><span>Computer Networks</span><span>Teaching Assistant</span><span>Troubleshooting</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="academic">
-          <span class="date">Mar 2026 – Jun 2026</span>
-          <h3>TelyuBiz Marketplace – Computing Project</h3>
-          <div class="sub">System Analyst · Documentation · QA Support</div>
-          <p class="muted">A student marketplace platform supporting buying and selling among university students.</p>
-          <ul class="list">
-            <li>Analysed system requirements, user needs, business flow, and core platform features</li>
-            <li>Prepared documentation from scratch: proposal, SRS, SDD, UAT, user manuals, and test documentation</li>
-            <li>Supported QA through manual testing, feature reviews, and issue tracking</li>
-          </ul>
-          <div class="tags"><span>System Analysis</span><span>SRS &amp; SDD</span><span>Manual Testing</span><span>UAT</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="academic">
-          <span class="date now">Jan 2026 – Present</span>
-          <h3>Human Fall Movement Phase Prediction Using Skeleton Pose</h3>
-          <div class="sub">Final-year research project</div>
-          <p class="muted">Predicting human fall movement phases from skeleton pose representation.</p>
-          <ul class="list">
-            <li>Applied YOLO Pose keypoint extraction and sliding-window sequence formation</li>
-            <li>Handled data preprocessing, pose-based feature representation, and evaluation metrics</li>
-            <li>Prepared technical research documentation</li>
-          </ul>
-          <div class="tags"><span>Computer Vision</span><span>Machine Learning</span><span>Python</span><span>YOLO Pose</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="academic">
-          <span class="date">Sep 2025 – Dec 2025</span>
-          <h3>CukurMen Website – Academic Project</h3>
-          <div class="sub">Project Manager</div>
-          <p class="muted">Led a team of four building a web platform for a local barbershop case study.</p>
-          <ul class="list">
-            <li>Coordinated with external stakeholders and facilitated requirement discussions</li>
-            <li>Managed task allocation, team communication, and progress across the development lifecycle</li>
-            <li>Maintained project documentation and kept milestones on schedule</li>
-          </ul>
-          <div class="tags"><span>Project Management</span><span>Web Development</span><span>Stakeholder Communication</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="academic">
-          <span class="date">Feb 2026</span>
-          <h3>KlikStart 2.0 Business Idea Competition</h3>
-          <div class="sub">Top 30 Participant</div>
-          <p class="muted">Pitched a business idea and placed in the top 30 participants.</p>
-          <ul class="list">
-            <li>Developed the idea presentation, problem analysis, and proposed solution concept</li>
-            <li>Practised structured pitching, business analysis, and solution design</li>
-          </ul>
-          <div class="tags"><span>Business Idea</span><span>Presentation</span><span>Innovation</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="event">
-          <span class="date">Jul 2026</span>
-          <h3>Event Marketing Staff · Freelance</h3>
-          <div class="sub">Heybee Visual · Purwokerto</div>
-          <p class="muted">Promoted photography services at event booths.</p>
-          <ul class="list">
-            <li>Distributed brochures and promotional materials to visitors</li>
-            <li>Explained service details and answered questions from attendees</li>
-            <li>Assisted with booth setup and on-site event activities</li>
-          </ul>
-          <div class="tags"><span>Marketing Communication</span><span>Customer Engagement</span></div>
-        </div>
-
-        <div class="timeline-item exp-item" data-cat="event">
-          <span class="date">Jan 2019 – Aug 2026</span>
-          <h3>Event Crew / Usher</h3>
-          <div class="sub">Pita Merah Event Organizer · Purwokerto</div>
-          <p class="muted">Weddings, engagements, store openings, and exhibitions — a long stretch of high-pressure guest service.</p>
-          <ul class="list">
-            <li>Handled guest reception, guest book management, and gift reception</li>
-            <li>Assisted with guest flow and on-site coordination during events</li>
-            <li>Supported event setup and teamwork across crews</li>
-          </ul>
-          <div class="tags"><span>Communication</span><span>Teamwork</span><span>Coordination</span></div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Skills</span>
-      <h2 class="section-title">Technical &amp; professional skills</h2>
-      <p class="section-sub">Highlighted items are what I use most.</p>
-    </div>
-    <div class="filter-row reveal">
-      <button class="pill active" data-skill="s1">Technical</button>
-      <button class="pill" data-skill="s2">Professional</button>
-      <button class="pill" data-skill="s3">Tools &amp; languages</button>
-    </div>
-    <div class="card reveal">
-      <div class="skill-panel active" id="s1">
-        <div class="skill-group">
-          <h4>Frontend</h4>
-          <div class="chips">
-            <span class="key">React.js</span><span class="key">TypeScript</span><span class="key">Tailwind CSS</span>
-            <span>JavaScript</span><span>HTML</span><span>CSS</span><span>Responsive Design</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Backend &amp; data</h4>
-          <div class="chips">
-            <span class="key">Supabase</span><span class="key">SQL</span><span>MySQL</span>
-            <span>REST API Integration</span><span>Database Design</span><span>Python</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Quality assurance &amp; analysis</h4>
-          <div class="chips">
-            <span class="key">Manual Testing</span><span class="key">Requirement Analysis</span>
-            <span>Test Case Creation</span><span>UAT</span><span>Issue Tracking</span>
-            <span>Business Process Analysis</span><span>SRS &amp; SDD</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Exploring</h4>
-          <div class="chips">
-            <span>Computer Vision</span><span>Machine Learning</span><span>YOLO Pose</span><span>Data Analysis</span>
+            <div class="stats">
+              <div class="stat"><span class="stat-number" data-count="8">0</span><small>Projects</small></div>
+              <div class="stat"><span class="stat-number" data-count="6">0</span><small>Certificates</small></div>
+              <div class="stat"><span class="stat-number" data-count="5">0</span><small>Core Roles</small></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="skill-panel" id="s2">
-        <div class="skill-group">
-          <h4>How I work</h4>
-          <div class="chips">
-            <span class="key">Technical Documentation</span><span class="key">Problem Analysis</span>
-            <span>Project Coordination</span><span>Stakeholder Communication</span>
-            <span>Attention to Detail</span><span>Analytical Thinking</span>
-            <span>Team Collaboration</span><span>Time Management</span>
-            <span>Presentation</span><span>Research Writing</span>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">About Me</span>
+          <h2 class="section-title">Curious, Adaptive, and Eager to Grow</h2>
+          <p class="section-sub">Explore my profile, focus areas, and current availability through these tabs.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="tabs left">
+              <button class="pill active" data-tab="profile">Profile</button>
+              <button class="pill" data-tab="focus">Focus Areas</button>
+              <button class="pill" data-tab="availability">Availability</button>
+            </div>
+
+            <div class="panel active" id="profile">
+              I am currently a 7th-semester Informatics student at Telkom University Purwokerto with interests in Data Analysis, Quality Assurance, System Analysis, Artificial Intelligence, and Computer Vision. Through coursework, academic projects, and hands-on project experience, I have been building practical skills in programming, data processing, system documentation, testing mindset, and problem analysis.
+            </div>
+            <div class="panel" id="focus">
+              My current focus includes Data Analysis, Quality Assurance, System Analysis, project documentation, and web-based project development. I also have academic exposure to Computer Vision, pose estimation, and Deep Learning concepts through my ongoing final project research.
+            </div>
+            <div class="panel" id="availability">
+              I am comfortable working both independently and in team-based environments. I enjoy contributing to collaborative discussions while also taking responsibility for individual tasks. I am currently interested in internship opportunities related to Data Analyst, Quality Assurance, System Analyst, IT Support, and technology project documentation.
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="info-item"><i class="fas fa-user"></i><div><strong>Full Name</strong><br><span>Caroline Carren</span></div></div>
+            <div class="info-item"><i class="fas fa-calendar-check"></i><div><strong>7th-Semester Student</strong><br><span>Open to internship opportunities</span></div></div>
+            <div class="info-item"><i class="fas fa-briefcase"></i><div><strong>Target Roles</strong><br><span>Data Analyst • QA • System Analyst • IT Support</span></div></div>
+            <div class="info-item"><i class="fas fa-location-dot"></i><div><strong>Location</strong><br><span>Purwokerto, Indonesia</span></div></div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i><div><strong>Major</strong><br><span>Informatics Engineering</span></div></div>
           </div>
         </div>
       </div>
-      <div class="skill-panel" id="s3">
-        <div class="skill-group">
-          <h4>Tools</h4>
-          <div class="chips">
-            <span class="key">Git &amp; GitHub</span><span class="key">Visual Studio Code</span>
-            <span>Figma</span><span>Trello</span><span>Draw.io</span><span>Canva</span>
-            <span>Microsoft Office</span><span>Google Workspace</span>
-            <span>Google Colab</span><span>Jupyter Notebook</span>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Education</span>
+          <h2 class="section-title">Academic Background</h2>
+          <p class="section-sub">Academic journey, study focus, and relevant coursework for technology-based internship roles.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="date">2020 - 2023</span>
+              <h3>State Senior High School 1 Purwokerto</h3>
+              <div class="sub">Science Major</div>
+              <p class="muted">Studied Mathematics, Physics, Chemistry, and Biology as a foundation for analytical and systematic thinking.</p>
+            </div>
+
+            <div class="timeline-item">
+              <span class="date">2023 - Present</span>
+              <h3>Telkom University Purwokerto</h3>
+              <div class="sub">Bachelor's Degree in Informatics Engineering</div>
+              <p class="muted">Focused on algorithms, data structures, web development, computer systems, artificial intelligence, database systems, and project-based learning.</p>
+              <div class="tags">
+                <span>Informatics Engineering</span>
+                <span>Project-Based Learning</span>
+                <span>Relevant Coursework: Database Systems</span>
+                <span>Web Programming</span>
+                <span>Computer Networks</span>
+                <span>Artificial Intelligence</span>
+                <span>Software Engineering</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <div class="chips">
-            <span class="key">Indonesian — Native</span><span class="key">English — Professional working</span>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Experience</span>
+          <h2 class="section-title">Work & Project Experience</h2>
+          <p class="section-sub">Filter by category to quickly explore relevant experience.</p>
+        </div>
+
+        <div class="filter-row reveal">
+          <button class="pill active" data-exp-filter="all">All</button>
+          <button class="pill" data-exp-filter="academic">Academic</button>
+          <button class="pill" data-exp-filter="professional">Professional</button>
+          <button class="pill" data-exp-filter="event">Event</button>
+        </div>
+
+        <div class="grid-2">
+          <div class="exp-item" data-exp="professional">
+            <div class="card reveal">
+              <span class="date">Jul 2026 - Present</span>
+              <h3>Web Application Developer Intern</h3>
+              <div class="sub">PT Kereta Api Indonesia (Persero) – DAOP 6 Yogyakarta</div>
+              <p class="muted">Developing internal web applications to support operational and business processes at DAOP 6 Yogyakarta.</p>
+              <ul class="list">
+                <li>Developed and maintained internal web applications to support operational and business processes</li>
+                <li>Built responsive frontend interfaces and integrated them with backend services and databases</li>
+                <li>Collaborated with supervisors and cross-functional teams to analyze requirements and implement system enhancements</li>
+                <li>Performed debugging, testing, and performance optimization to improve application reliability and user experience</li>
+                <li>Participated in code reviews, technical discussions, and software documentation following development best practices</li>
+              </ul>
+              <div class="tags"><span>Web Development</span><span>Frontend</span><span>Backend Integration</span><span>Testing</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="professional">
+            <div class="card reveal">
+              <span class="date">Jun 2026 - Jul 2026</span>
+              <h3>Full Stack Developer Intern</h3>
+              <div class="sub">Elsotel • Purwokerto</div>
+              <p class="muted">Developed and maintained Elsotel Purwokerto's official hotel website as a Full Stack Developer Intern.</p>
+              <ul class="list">
+                <li>Built responsive web applications using React, TypeScript, Tailwind CSS, and Supabase</li>
+                <li>Implemented customer-facing features, including room reservations, restaurant, promotions, gallery, and user dashboard modules</li>
+                <li>Developed administrative features for managing rooms, bookings, website content, and hotel operations</li>
+                <li>Optimized application performance, resolved bugs, and collaborated with stakeholders to deliver new features</li>
+              </ul>
+              <div class="tags"><span>React.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="academic professional">
+            <div class="card reveal">
+              <span class="date">Feb 2026 - Jun 2026</span>
+              <h3>Practicum Assistant – Computer Networks</h3>
+              <div class="sub">Telkom University Purwokerto</div>
+              <p class="muted">Assisted in teaching Computer Networks practicum sessions for approximately 50 students.</p>
+              <ul class="list">
+                <li>Guided students in understanding networking concepts, practical configurations, and troubleshooting processes</li>
+                <li>Supported practicum preparation, class coordination, student assistance, and evaluation activities</li>
+                <li>Strengthened communication, teaching, problem-solving, and technical explanation skills</li>
+              </ul>
+              <div class="tags"><span>Computer Networks</span><span>Teaching Assistant</span><span>Troubleshooting</span><span>Technical Explanation</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="academic professional">
+            <div class="card reveal">
+              <span class="date">Mar 2026 - Jun 2026</span>
+              <h3>TelyuBiz Marketplace – Computing Project</h3>
+              <div class="sub">System Analyst • Marketing • Documentation</div>
+              <p class="muted">Developed a student marketplace platform to support buying and selling activities among university students.</p>
+              <ul class="list">
+                <li>Analyzed system requirements, user needs, business flow, and core platform features</li>
+                <li>Prepared documentation from scratch, including requirements, business process, system explanation, and supporting documents</li>
+                <li>Supported marketing and communication strategy for platform introduction and user engagement</li>
+              </ul>
+              <div class="tags"><span>System Analysis</span><span>Documentation</span><span>Marketing</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="academic">
+            <div class="card reveal">
+              <span class="date">Jan 2026 - Present</span>
+              <h3>Human Fall Movement Phase Prediction Using Skeleton Pose</h3>
+              <div class="sub">Ongoing Academic Research Project</div>
+              <p class="muted">Currently developing an academic research project focused on predicting human fall movement phases using skeleton pose representation.</p>
+              <ul class="list">
+                <li>Utilized YOLO Pose keypoint extraction and sliding window sequence formation concepts</li>
+                <li>Worked with data preprocessing, pose-based feature representation, and evaluation metrics</li>
+                <li>Prepared technical research documentation and strengthened academic writing skills</li>
+                <li>Built understanding in computer vision, machine learning, Python, and data analysis</li>
+              </ul>
+              <div class="tags"><span>Computer Vision</span><span>Machine Learning</span><span>Python</span><span>Research</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="event professional">
+            <div class="card reveal">
+              <span class="date">Jan 2019 - Aug 2026</span>
+              <h3>Event Crew / Usher</h3>
+              <div class="sub">Pita Merah Event Organizer • Purwokerto</div>
+              <p class="muted">Worked in a dynamic event environment that required communication, coordination, and guest service.</p>
+              <ul class="list">
+                <li>Welcomed guests, managed the guest book, and handled gift reception</li>
+                <li>Assisted with guest flow and basic event coordination</li>
+                <li>Supported event setup and on-site teamwork</li>
+              </ul>
+              <div class="tags"><span>Communication</span><span>Teamwork</span><span>Coordination</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item" data-exp="event professional">
+            <div class="card reveal">
+              <span class="date">Jul 2025 &amp; Jul 2026</span>
+              <h3>Event Marketing Staff</h3>
+              <div class="sub">Heybee Visual • Purwokerto</div>
+              <p class="muted">Supported promotional activities and audience engagement during events for a local photography brand.</p>
+              <ul class="list">
+                <li>Distributed brochures and promotional materials to visitors</li>
+                <li>Explained service details and answered basic questions</li>
+                <li>Assisted in audience engagement at the booth</li>
+              </ul>
+              <div class="tags"><span>Marketing Communication</span><span>Customer Engagement</span><span>Public Interaction</span></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Projects</span>
-      <h2 class="section-title">Things I've built</h2>
-      <p class="section-sub">Search or filter, then open a card for the details.</p>
-    </div>
-    <div class="search-row reveal">
-      <input type="text" class="search-box" id="projectSearch" placeholder="Search projects…" aria-label="Search projects">
-    </div>
-    <div class="filter-row reveal">
-      <button class="pill active" data-proj="all">All</button>
-      <button class="pill" data-proj="web">Web</button>
-      <button class="pill" data-proj="ai">AI / ML</button>
-      <button class="pill" data-proj="system">System</button>
-    </div>
-    <div class="grid-3" id="projectGrid">
+    <section id="competition">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Competition</span>
+          <h2 class="section-title">Competition & Achievement</h2>
+        </div>
 
-      <div class="card project-card reveal" data-cat="web"
-        data-title="KAI Internal Web Application"
-        data-body="Internal web applications supporting operational and business processes at PT Kereta Api Indonesia (Persero) DAOP 6 Yogyakarta. I develop and maintain features used by operational teams, build responsive frontend interfaces, and integrate them with backend services and databases. The role also covers requirement analysis with supervisors, debugging, performance optimisation, code reviews, and software documentation."
-        data-tags="Web Development,Frontend,Backend Integration,Testing">
-        <div class="project-icon"><i class="fa-solid fa-train"></i></div>
-        <h3>KAI Internal Web Application</h3>
-        <p class="muted">Internal operational tools for KAI DAOP 6 Yogyakarta — built during my current internship.</p>
-        <div class="tags"><span>Web Development</span><span>Frontend</span><span>Backend Integration</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="web"
-        data-title="Elsotel Hotel Website"
-        data-body="A full-stack hotel website built with React, TypeScript, Tailwind CSS, and Supabase during my internship at Elsotel Purwokerto. Customer-facing side covers room reservations, restaurant information, promotions, a gallery, and a user dashboard. The admin side handles room management, bookings, website content, and hotel operations. I also optimised performance, resolved bugs, and shipped features based on stakeholder feedback."
-        data-tags="React.js,TypeScript,Tailwind CSS,Supabase,Full Stack">
-        <div class="project-icon"><i class="fa-solid fa-hotel"></i></div>
-        <h3>Elsotel Hotel Website</h3>
-        <p class="muted">Production hotel site with reservations, promotions, customer dashboard, and an admin panel.</p>
-        <div class="tags"><span>React.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="web"
-        data-title="CukurMen Website"
-        data-body="An academic web project for CukurMen Purwokerto, a local barbershop. I led a team of four as Project Manager: coordinating with external stakeholders, facilitating requirement discussions, allocating tasks, tracking progress across the software development lifecycle, and maintaining project documentation through to delivery."
-        data-tags="Project Manager,Web Development,Team Project,Documentation">
-        <div class="project-icon"><i class="fa-solid fa-scissors"></i></div>
-        <h3>CukurMen Website</h3>
-        <p class="muted">Barbershop web platform — led a four-person team as Project Manager.</p>
-        <div class="tags"><span>Project Manager</span><span>Web Development</span><span>Team Project</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="system"
-        data-title="TelyuBiz Marketplace"
-        data-body="A student marketplace platform for buying and selling within the university. I worked as System Analyst and documentation lead: analysing requirements, mapping business processes, and defining core features for both mobile and web. I produced the full documentation set — proposal, SRS, SDD, UAT, user manuals, and test documentation — and supported QA through manual testing, feature reviews, and issue tracking."
-        data-tags="System Analysis,SRS &amp; SDD,Manual Testing,UAT">
-        <div class="project-icon"><i class="fa-solid fa-store"></i></div>
-        <h3>TelyuBiz Marketplace</h3>
-        <p class="muted">Student marketplace — system analysis, full documentation set, and QA support.</p>
-        <div class="tags"><span>System Analysis</span><span>Documentation</span><span>Manual Testing</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="ai"
-        data-title="Human Fall Movement Phase Prediction"
-        data-body="My ongoing final-year research: predicting the phases of a human fall using skeleton pose representation. The approach uses YOLO Pose keypoint extraction with sliding-window sequence formation, plus data preprocessing, pose-based feature representation, and evaluation metrics. Running alongside it is the technical research documentation and academic write-up."
-        data-tags="Computer Vision,YOLO Pose,Python,Deep Learning">
-        <div class="project-icon"><i class="fa-solid fa-person-falling"></i></div>
-        <h3>Human Fall Movement Phase Prediction</h3>
-        <p class="muted">Final-year research on skeleton pose sequences — ongoing.</p>
-        <div class="tags"><span>Computer Vision</span><span>YOLO Pose</span><span>Python</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="ai"
-        data-title="Weather Prediction System"
-        data-body="A machine learning model that classifies weather conditions from historical meteorological data. Covered data cleaning, feature selection, model training, and accuracy evaluation across several classifiers."
-        data-tags="Python,Machine Learning,Classification">
-        <div class="project-icon"><i class="fa-solid fa-cloud-sun"></i></div>
-        <h3>Weather Prediction System</h3>
-        <p class="muted">Weather condition classifier built with machine learning techniques.</p>
-        <div class="tags"><span>Python</span><span>Machine Learning</span><span>Classification</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="ai"
-        data-title="Diabetes Prediction System"
-        data-body="A fuzzy inference system that estimates diabetes risk from health-related variables. I designed the membership functions, rule base, and defuzzification logic, then evaluated the output against sample cases."
-        data-tags="Fuzzy Logic,Health Tech,Python">
-        <div class="project-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-        <h3>Diabetes Prediction System</h3>
-        <p class="muted">Fuzzy inference system estimating diabetes risk from health variables.</p>
-        <div class="tags"><span>Fuzzy Logic</span><span>Health Tech</span><span>Python</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-      <div class="card project-card reveal" data-cat="system"
-        data-title="Evotick"
-        data-body="A Java desktop application with database integration and structured data management. Built around object-oriented design, CRUD operations, and a relational schema for storing and retrieving records."
-        data-tags="Java,Database,OOP">
-        <div class="project-icon"><i class="fa-solid fa-ticket"></i></div>
-        <h3>Evotick</h3>
-        <p class="muted">Java application with database integration and structured data management.</p>
-        <div class="tags"><span>Java</span><span>Database</span><span>OOP</span></div>
-        <div class="project-action">Read more <i class="fa-solid fa-arrow-right"></i></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Certifications</span>
-      <h2 class="section-title">Certifications &amp; training</h2>
-      <p class="section-sub">Cloud, AI, data, and database fundamentals.</p>
-    </div>
-    <div class="grid-3">
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-brands fa-aws"></i></div>
-        <div><h3>AWS Academy Graduate — Cloud Foundations</h3><small class="muted">Amazon Web Services · Dec 2025</small></div></div>
-        <p class="muted">Cloud computing fundamentals, core AWS services, and basic cloud architecture.</p>
-      </div>
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-brands fa-microsoft"></i></div>
-        <div><h3>Microsoft Certified: Azure AI Fundamentals</h3><small class="muted">Microsoft · Mar 2026</small></div></div>
-        <p class="muted">Key AI concepts, machine learning basics, and Azure AI service foundations.</p>
-      </div>
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-solid fa-database"></i></div>
-        <div><h3>Big Data Foundations — Level 1</h3><small class="muted">IBM · Mar 2026</small></div></div>
-        <p class="muted">Big data fundamentals, distributed systems, storage, and large-scale processing.</p>
-      </div>
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-solid fa-table"></i></div>
-        <div><h3>SQL and Relational Databases 101</h3><small class="muted">Cognitive Class · Mar 2026</small></div></div>
-        <p class="muted">SQL querying, relational models, structured data design, and database fundamentals.</p>
-      </div>
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-solid fa-chart-simple"></i></div>
-        <div><h3>Big Data 101</h3><small class="muted">Cognitive Class · Mar 2026</small></div></div>
-        <p class="muted">Core concepts of big data analytics, storage patterns, and data-driven systems.</p>
-      </div>
-      <div class="card cert-card reveal">
-        <div class="cert-head"><div class="cert-icon"><i class="fa-solid fa-robot"></i></div>
-        <div><h3>Intro to Applied AI, Analytics &amp; Automation</h3><small class="muted">RevoU · Mar 2026</small></div></div>
-        <p class="muted">Applied AI, analytics, and automation concepts in practical contexts.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Contact</span>
-      <h2 class="section-title">Let's connect</h2>
-      <p class="section-sub">Email is the fastest way to reach me.</p>
-    </div>
-    <div class="contact-box">
-      <div class="card reveal">
-        <div class="info-item"><i class="fa-solid fa-envelope"></i><div><h4>Email</h4><span>carolinecarren22@gmail.com</span></div></div>
-        <div class="info-item"><i class="fa-brands fa-linkedin-in"></i><div><h4>LinkedIn</h4><span><a href="https://www.linkedin.com/in/caroline-carren-a1aa51346" target="_blank" rel="noopener" style="color:inherit">View profile</a></span></div></div>
-        <div class="info-item"><i class="fa-brands fa-github"></i><div><h4>GitHub</h4><span><a href="https://github.com/carolinecarrenn" target="_blank" rel="noopener" style="color:inherit">@carolinecarrenn</a></span></div></div>
-        <div class="info-item"><i class="fa-brands fa-instagram"></i><div><h4>Instagram</h4><span><a href="https://www.instagram.com/carolinecarrenn/" target="_blank" rel="noopener" style="color:inherit">@carolinecarrenn</a></span></div></div>
-      </div>
-      <div class="card reveal">
-        <h3>Open to web development, QA, and system analysis roles</h3>
-        <p class="muted" style="margin-top:10px">
-          I'm currently interning at KAI DAOP 6 Yogyakarta and graduating in 2027. If you're hiring for an internship or
-          entry-level role, or want to talk about a project, send me an email or a LinkedIn message — I reply within a day.
-        </p>
-        <div class="buttons" style="margin-top:22px;margin-bottom:0">
-          <a href="mailto:carolinecarren22@gmail.com" class="btn primary"><i class="fa-solid fa-paper-plane"></i> Send an email</a>
-          <button class="btn" id="copyBtn"><i class="fa-solid fa-copy"></i> Copy email address</button>
-          <a href="Caroline_Carren_CV.pdf" class="btn" download><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+        <div class="card reveal">
+          <span class="date">Dec 2025 - Feb 2026</span>
+          <h3>Participant – KlikStart 2.0 2025 Business Idea Competition</h3>
+          <div class="sub">Selected as Top 30 Participant</div>
+          <p class="muted">Participated in a business idea competition and was selected as one of the Top 30 participants.</p>
+          <ul class="list">
+            <li>Developed a business idea presentation, problem analysis, and proposed solution concept</li>
+            <li>Strengthened business analysis, presentation, teamwork, and innovation skills</li>
+            <li>Learned how to communicate ideas clearly through structured pitching and solution design</li>
+          </ul>
+          <div class="tags"><span>Business Idea</span><span>Presentation</span><span>Innovation</span><span>Teamwork</span></div>
         </div>
       </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Skills</span>
+          <h2 class="section-title">Technical & Professional Skills</h2>
+          <p class="section-sub">Switch the category to keep the section compact and easy to scan.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="tabs">
+            <button class="pill active" data-skill-tab="technical">Technical</button>
+            <button class="pill" data-skill-tab="professional">Professional</button>
+            <button class="pill" data-skill-tab="tools">Tools & Focus</button>
+            <button class="pill" data-skill-tab="languages">Languages</button>
+          </div>
+
+          <div class="skill-panel active" id="technical">
+            <div class="grid-2">
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>Python</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>HTML & CSS</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>React.js</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+              </div>
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>TypeScript</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>JavaScript</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>Database / SQL</span><span>Basic–Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div></div>
+              </div>
+            </div>
+            <div class="tags"><span>Tailwind CSS</span><span>Supabase</span><span>REST API</span><span>Machine Learning</span><span>Computer Vision</span><span>Data Analysis</span><span>MySQL</span></div>
+          </div>
+
+          <div class="skill-panel" id="professional">
+            <div class="grid-2">
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>Documentation</span><span>Strong</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>System Analysis</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+              </div>
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>Quality Assurance</span><span>Basic–Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div></div>
+                <div class="skill-item"><div class="skill-top"><span>Teamwork & Communication</span><span>Strong</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+              </div>
+            </div>
+            <div class="tags"><span>Presentation</span><span>Problem Analysis</span><span>Research Writing</span><span>Marketing</span></div>
+          </div>
+
+          <div class="skill-panel" id="tools">
+            <p class="muted">Tools and learning areas I currently use or have explored through academic and project work:</p>
+            <div class="tags">
+              <span>Microsoft Office</span>
+              <span>Google Workspace</span>
+              <span>GitHub</span>
+              <span>Visual Studio Code</span>
+              <span>React</span>
+              <span>Supabase</span>
+              <span>Canva</span>
+              <span>Figma Basic</span>
+              <span>MySQL</span>
+              <span>Python Data Processing</span>
+              <span>Documentation</span>
+              <span>Software Testing Mindset</span>
+            </div>
+          </div>
+
+          <div class="skill-panel" id="languages">
+            <div class="grid-2">
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>Indonesian</span><span>Native</span></div><div class="skill-bar"><div class="skill-fill" data-width="100%"></div></div></div>
+              </div>
+              <div>
+                <div class="skill-item"><div class="skill-top"><span>English</span><span>Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="60%"></div></div></div>
+              </div>
+            </div>
+            <div class="tags"><span>Bahasa Indonesia</span><span>English</span><span>Written Communication</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Certifications</span>
+          <h2 class="section-title">Certifications & Technical Learning</h2>
+        </div>
+
+        <div class="filter-row reveal">
+          <input type="text" class="search-box" id="certSearch" placeholder="Search certificate...">
+        </div>
+
+        <div class="grid-2" id="certGrid">
+          <div class="card cert-card reveal" data-cert="aws cloud foundations amazon">
+            <div class="cert-head"><div class="cert-icon"><i class="fab fa-aws"></i></div><div><h3>AWS Academy Graduate - Cloud Foundations</h3><small class="muted">Amazon Web Services • Issued Dec 2025</small></div></div>
+            <p class="muted">Covered cloud computing fundamentals, essential AWS services, and basic cloud architecture concepts.</p>
+          </div>
+          <div class="card cert-card reveal" data-cert="microsoft azure ai fundamentals">
+            <div class="cert-head"><div class="cert-icon"><i class="fab fa-microsoft"></i></div><div><h3>Microsoft Certified: Azure AI Fundamentals</h3><small class="muted">Microsoft • Issued Mar 2026</small></div></div>
+            <p class="muted">Learned key AI concepts, machine learning basics, and the foundations of Azure AI services.</p>
+          </div>
+          <div class="card cert-card reveal" data-cert="revou applied ai analytics automation">
+            <div class="cert-head"><div class="cert-icon"><i class="fas fa-brain"></i></div><div><h3>Intro to Applied AI, Analytics, and Automation</h3><small class="muted">RevoU • Issued Mar 2026</small></div></div>
+            <p class="muted">Introduced applied AI, analytics, and automation concepts in practical contexts.</p>
+          </div>
+          <div class="card cert-card reveal" data-cert="ibm big data foundations">
+            <div class="cert-head"><div class="cert-icon"><i class="fas fa-database"></i></div><div><h3>Big Data Foundations – Level 1</h3><small class="muted">IBM • Issued Mar 2026</small></div></div>
+            <p class="muted">Explored the fundamentals of big data, distributed systems, data storage, and large-scale processing.</p>
+          </div>
+          <div class="card cert-card reveal" data-cert="cognitive class big data 101 analytics">
+            <div class="cert-head"><div class="cert-icon"><i class="fas fa-chart-line"></i></div><div><h3>Big Data 101</h3><small class="muted">Cognitive Class • Issued Mar 2026</small></div></div>
+            <p class="muted">Introduced core concepts of big data analytics, storage patterns, and data-driven systems.</p>
+          </div>
+          <div class="card cert-card reveal" data-cert="sql relational databases cognitive class">
+            <div class="cert-head"><div class="cert-icon"><i class="fas fa-table"></i></div><div><h3>SQL and Relational Databases 101</h3><small class="muted">Cognitive Class • Issued Mar 2026</small></div></div>
+            <p class="muted">Learned SQL querying, relational models, structured data design, and database fundamentals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Projects</span>
+          <h2 class="section-title">Projects That Represent Me</h2>
+          <p class="section-sub">Search and filter projects by focus area. Click a card to view details.</p>
+        </div>
+
+        <div class="filter-row reveal">
+          <input type="text" class="search-box" id="projectSearch" placeholder="Search project...">
+          <button class="pill active" data-project-filter="all">All</button>
+          <button class="pill" data-project-filter="web">Web</button>
+          <button class="pill" data-project-filter="ai">AI / ML</button>
+          <button class="pill" data-project-filter="system">System</button>
+        </div>
+
+        <div class="grid-3" id="projectGrid">
+          <div class="card project-card reveal" data-category="web system" data-project="telyubiz marketplace system analyst documentation marketing web system" data-title="TelyuBiz Marketplace" data-desc="A student marketplace platform developed to support buying and selling activities among university students. My contributions focused on analyzing user needs, defining business flow, preparing system documentation, supporting marketing communication, and helping explain the platform concept for user engagement.">
+            <div class="project-icon"><i class="fas fa-store"></i></div>
+            <h3>TelyuBiz Marketplace</h3>
+            <p class="muted">Student marketplace platform for university students, with contributions in system analysis, documentation, and marketing communication.</p>
+            <div class="tags"><span>System Analyst</span><span>Documentation</span><span>Marketing</span><span>Business Flow</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="ai" data-project="human fall movement phase prediction skeleton pose yolo pose machine learning ai python research" data-title="Human Fall Movement Phase Prediction" data-desc="Ongoing academic research project for final assignment preparation. The research focuses on predicting human fall movement phases using skeleton pose representation, YOLO Pose keypoint extraction, sliding window sequence formation, and deep learning-based modeling concepts.">
+            <div class="project-icon"><i class="fas fa-person-falling"></i></div>
+            <h3>Human Fall Movement Phase Prediction</h3>
+            <p class="muted">Ongoing final project research using skeleton pose representation for human fall movement phase prediction.</p>
+            <div class="tags"><span>Ongoing Research</span><span>YOLO Pose</span><span>Python</span><span>Deep Learning</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="web" data-project="cukurmen website barbershop project manager web development team project" data-title="CukurMen Website" data-desc="Academic web development project for a local barbershop case study. I contributed as project manager by coordinating team tasks, organizing project flow, supporting communication among members, and helping define the website structure based on project requirements.">
+            <div class="project-icon"><i class="fas fa-scissors"></i></div>
+            <h3>CukurMen Website</h3>
+            <p class="muted">Academic website project for a local barbershop, focused on project coordination, planning, and website structure.</p>
+            <div class="tags"><span>Web Development</span><span>Project Manager</span><span>Team Project</span><span>Planning</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="ai" data-project="weather prediction system python machine learning ai prediction" data-title="Weather Prediction System" data-desc="Machine learning practice project focused on classifying weather conditions based on input data. This project strengthened my understanding of data preprocessing, prediction workflow, and basic model evaluation.">
+            <div class="project-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+            <h3>Weather Prediction System</h3>
+            <p class="muted">Built a weather prediction model using machine learning techniques to classify weather conditions.</p>
+            <div class="tags"><span>Python</span><span>ML</span><span>Prediction</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="ai" data-project="diabetes prediction fuzzy logic health tech ai prediction" data-title="Diabetes Prediction System" data-desc="Rule-based prediction project using fuzzy logic to estimate diabetes risk from health-related indicators. This project helped me understand decision logic, variable analysis, and simple health-tech problem modeling.">
+            <div class="project-icon"><i class="fas fa-heart-pulse"></i></div>
+            <h3>Diabetes Prediction System</h3>
+            <p class="muted">Designed a fuzzy inference system to predict diabetes risk by processing health-related variables.</p>
+            <div class="tags"><span>Fuzzy Logic</span><span>Health Tech</span><span>Prediction</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="system" data-project="evotick java database application system" data-title="Evotick" data-desc="Java-based application project integrated with a database. The project focused on structured data management, application logic, and basic user-oriented system functionality.">
+            <div class="project-icon"><i class="fas fa-ticket"></i></div>
+            <h3>Evotick</h3>
+            <p class="muted">Developed a Java-based application with database integration and structured data management.</p>
+            <div class="tags"><span>Java</span><span>Database</span><span>Application</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+          <div class="card project-card reveal" data-category="web system" data-project="elsotel hotel website full stack react typescript tailwind css supabase reservation admin system" data-title="Elsotel Hotel Website" data-desc="Developed and maintained Elsotel Purwokerto's official hotel website as a Full Stack Developer Intern. Built responsive customer-facing features for room reservations, restaurant information, promotions, gallery, and user dashboards, along with administrative modules for managing rooms, bookings, website content, and hotel operations.">
+            <div class="project-icon"><i class="fas fa-hotel"></i></div>
+            <h3>Elsotel Hotel Website</h3>
+            <p class="muted">Full-stack hotel website featuring reservations, promotions, customer dashboards, and operational admin modules.</p>
+            <div class="tags"><span>React.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+
+          <div class="card project-card reveal" data-category="web system" data-project="kai pt kereta api indonesia daop 6 yogyakarta internal web application frontend backend integration database testing" data-title="KAI Internal Web Application" data-desc="Developed and maintained internal web applications for PT Kereta Api Indonesia (Persero) DAOP 6 Yogyakarta to support operational and business processes. The work included requirement analysis, responsive frontend development, backend and database integration, debugging, testing, performance optimization, and technical documentation.">
+            <div class="project-icon"><i class="fas fa-train"></i></div>
+            <h3>KAI Internal Web Application</h3>
+            <p class="muted">Internal web application supporting operational and business processes at KAI DAOP 6 Yogyakarta.</p>
+            <div class="tags"><span>Web Development</span><span>Frontend</span><span>Backend Integration</span><span>Testing</span></div>
+            <div class="project-action">View Project Details <i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Contact</span>
+          <h2 class="section-title">Let’s Connect</h2>
+        </div>
+
+        <div class="contact-box">
+          <div class="card reveal">
+            <div class="info-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><br><span><a href="mailto:carolinecarren22@gmail.com" style="color:inherit;text-decoration:none;">carolinecarren22@gmail.com</a></span></div></div>
+            <div class="info-item"><i class="fab fa-linkedin-in"></i><div><strong>LinkedIn</strong><br><span><a href="https://www.linkedin.com/in/caroline-carren-a1aa51346" target="_blank" style="color:inherit;text-decoration:none;">View Profile</a></span></div></div>
+            <div class="info-item"><i class="fab fa-github"></i><div><strong>GitHub</strong><br><span><a href="https://github.com/carolinecarrenn" target="_blank" style="color:inherit;text-decoration:none;">@carolinecarrenn</a></span></div></div>
+            <div class="info-item"><i class="fab fa-instagram"></i><div><strong>Instagram</strong><br><span><a href="https://www.instagram.com/carolinecarrenn/" target="_blank" style="color:inherit;text-decoration:none;">@carolinecarrenn</a></span></div></div>
+          </div>
+
+          <div class="card reveal">
+            <h3>Open for Internship Opportunities</h3>
+            <p class="muted" style="margin:12px 0 22px;">Interested in discussing internship opportunities, academic projects, or collaboration? Feel free to reach out through email or LinkedIn.</p>
+            <div class="buttons">
+              <a href="mailto:carolinecarren22@gmail.com" class="btn primary"><i class="fas fa-paper-plane"></i> Send Email</a>
+              <button class="btn" id="copyEmail"><i class="fas fa-copy"></i> Copy Email</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Caroline Carren. All rights reserved.</footer>
+
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <div class="modal-head">
+        <div>
+          <span class="kicker">Project Detail</span>
+          <h3 id="modalTitle">Project Title</h3>
+        </div>
+        <button class="close-modal" id="closeModal"><i class="fas fa-xmark"></i></button>
+      </div>
+      <p class="muted" id="modalDesc"></p>
     </div>
   </div>
-</section>
 
-<footer>© 2026 Caroline Carren. Built and maintained by hand.</footer>
+  <div class="toast" id="toast">Copied.</div>
 
-<button class="scroll-top" id="scrollTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-<div class="toast" id="toast">Copied.</div>
+  <script>
+    const qs = (selector) => document.querySelector(selector);
+    const qsa = (selector) => document.querySelectorAll(selector);
 
-<div class="modal" id="modal">
-  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-head">
-      <h3 class="gradient-text" id="modalTitle" style="font-family:'Cormorant Garamond',serif;font-size:2rem"></h3>
-      <button class="close-modal" id="closeModal" aria-label="Close">&times;</button>
-    </div>
-    <p class="muted" id="modalBody"></p>
-    <div class="tags" id="modalTags"></div>
-  </div>
-</div>
+    const starCanvas = qs('#starCanvas');
+    const starCtx = starCanvas.getContext('2d');
+    let stars = [];
 
-<script>
-/* ---------- theme ---------- */
-const themeBtn=document.getElementById('themeBtn');
-themeBtn.addEventListener('click',()=>{
-  document.body.classList.toggle('light');
-  themeBtn.innerHTML=document.body.classList.contains('light')
-    ?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';
-});
+    function resizeStarCanvas(){
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+    }
 
-/* ---------- mobile menu ---------- */
-const menuBtn=document.getElementById('menuBtn'),navMenu=document.getElementById('navMenu');
-menuBtn.addEventListener('click',()=>navMenu.classList.toggle('show'));
-navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMenu.classList.remove('show')));
+    function createStars(){
+      stars = [];
+      const total = Math.min(95, Math.floor(window.innerWidth / 16));
+      for(let i = 0; i < total; i++){
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          vx: (Math.random() - .5) * .45,
+          vy: (Math.random() - .5) * .45,
+          r: Math.random() * 2 + .8
+        });
+      }
+    }
 
-/* ---------- scroll progress + scroll-to-top ---------- */
-const progress=document.getElementById('progress'),scrollTop=document.getElementById('scrollTop');
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  progress.style.width=(window.scrollY/h*100)+'%';
-  scrollTop.classList.toggle('show',window.scrollY>500);
-});
-scrollTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    function starColor(alpha){
+      return document.body.classList.contains('light')
+        ? `rgba(167,133,255,${alpha})`
+        : `rgba(255,255,255,${alpha})`;
+    }
 
-/* ---------- active nav link ---------- */
-const sections=[...document.querySelectorAll('section[id]')];
-window.addEventListener('scroll',()=>{
-  let current='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-140)current=s.id;});
-  navMenu.querySelectorAll('a').forEach(a=>{
-    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
-  });
-});
+    function animateStars(){
+      starCtx.clearRect(0,0,starCanvas.width,starCanvas.height);
 
-/* ---------- cursor glow ---------- */
-const glow=document.getElementById('glow');
-window.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
+      for(let i = 0; i < stars.length; i++){
+        const s = stars[i];
+        s.x += s.vx;
+        s.y += s.vy;
 
-/* ---------- star canvas ---------- */
-(function(){
-  const c=document.getElementById('starCanvas'),ctx=c.getContext('2d');
-  let stars=[];
-  function size(){c.width=innerWidth;c.height=innerHeight;
-    stars=Array.from({length:Math.min(120,Math.floor(innerWidth/12))},()=>({
-      x:Math.random()*c.width,y:Math.random()*c.height,
-      r:Math.random()*1.6+.3,s:Math.random()*.25+.05,o:Math.random()*.6+.2}));}
-  size();addEventListener('resize',size);
-  (function loop(){
-    ctx.clearRect(0,0,c.width,c.height);
-    const light=document.body.classList.contains('light');
-    stars.forEach(st=>{
-      ctx.beginPath();ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
-      ctx.fillStyle=light?`rgba(160,120,200,${st.o*.5})`:`rgba(255,255,255,${st.o})`;
-      ctx.fill();st.y-=st.s;if(st.y<0){st.y=c.height;st.x=Math.random()*c.width;}
+        if(s.x < 0 || s.x > starCanvas.width) s.vx *= -1;
+        if(s.y < 0 || s.y > starCanvas.height) s.vy *= -1;
+
+        starCtx.beginPath();
+        starCtx.arc(s.x,s.y,s.r,0,Math.PI * 2);
+        starCtx.fillStyle = starColor(.24);
+        starCtx.fill();
+
+        for(let j = i + 1; j < stars.length; j++){
+          const t = stars[j];
+          const dx = s.x - t.x;
+          const dy = s.y - t.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if(distance < 125){
+            starCtx.beginPath();
+            starCtx.moveTo(s.x,s.y);
+            starCtx.lineTo(t.x,t.y);
+            starCtx.strokeStyle = starColor(.10 - distance / 1600);
+            starCtx.lineWidth = 1;
+            starCtx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animateStars);
+    }
+
+    resizeStarCanvas();
+    createStars();
+    animateStars();
+
+    window.addEventListener('resize', () => {
+      resizeStarCanvas();
+      createStars();
     });
-    requestAnimationFrame(loop);
-  })();
-})();
 
-/* ---------- typing ---------- */
-(function(){
-  const roles=['Web Application Developer','Full Stack Developer Intern','System Analyst','Quality Assurance'];
-  const el=document.getElementById('typing');
-  let r=0,ch=0,del=false;
-  (function tick(){
-    const word=roles[r];
-    el.textContent=word.slice(0,ch);
-    if(!del&&ch<word.length){ch++;setTimeout(tick,75);}
-    else if(del&&ch>0){ch--;setTimeout(tick,35);}
-    else if(!del){del=true;setTimeout(tick,1600);}
-    else{del=false;r=(r+1)%roles.length;setTimeout(tick,300);}
-  })();
-})();
-
-/* ---------- about tabs ---------- */
-document.querySelectorAll('[data-tab]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.add('active');
-  });
-});
-
-/* ---------- skill tabs ---------- */
-document.querySelectorAll('[data-skill]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-skill]').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.skill-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.skill).classList.add('active');
-  });
-});
-
-/* ---------- experience filter ---------- */
-document.querySelectorAll('[data-exp]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-exp]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const f=btn.dataset.exp;
-    document.querySelectorAll('.exp-item').forEach(it=>{
-      it.classList.toggle('hide',f!=='all'&&it.dataset.cat!==f);
+    const cursorGlow = qs('#cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
     });
-  });
-});
 
-/* ---------- project filter + search ---------- */
-let projFilter='all',projQuery='';
-function applyProjects(){
-  document.querySelectorAll('.project-card').forEach(card=>{
-    const okCat=projFilter==='all'||card.dataset.cat===projFilter;
-    const hay=(card.dataset.title+' '+card.dataset.tags+' '+card.textContent).toLowerCase();
-    const okQ=!projQuery||hay.includes(projQuery);
-    card.classList.toggle('hide',!(okCat&&okQ));
-  });
-}
-document.querySelectorAll('[data-proj]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-proj]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');projFilter=btn.dataset.proj;applyProjects();
-  });
-});
-document.getElementById('projectSearch').addEventListener('input',e=>{
-  projQuery=e.target.value.trim().toLowerCase();applyProjects();
-});
+    const navMenu = qs('#navMenu');
+    const menuBtn = qs('#menuBtn');
+    menuBtn.addEventListener('click', () => navMenu.classList.toggle('show'));
+    qsa('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => navMenu.classList.remove('show'));
+    });
 
-/* ---------- project modal ---------- */
-const modal=document.getElementById('modal');
-function openModal(card){
-  document.getElementById('modalTitle').textContent=card.dataset.title;
-  document.getElementById('modalBody').textContent=card.dataset.body;
-  document.getElementById('modalTags').innerHTML=
-    card.dataset.tags.split(',').map(t=>`<span>${t.trim()}</span>`).join('');
-  modal.classList.add('show');
-}
-document.querySelectorAll('.project-card').forEach(card=>{
-  card.setAttribute('tabindex','0');
-  card.addEventListener('click',()=>openModal(card));
-  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(card);}});
-});
-document.getElementById('closeModal').addEventListener('click',()=>modal.classList.remove('show'));
-modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show');});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('show');});
+    const themeBtn = qs('#themeBtn');
+    const themeIcon = themeBtn.querySelector('i');
+    function setThemeIcon(){
+      themeIcon.className = document.body.classList.contains('light') ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    if(localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+    setThemeIcon();
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      setThemeIcon();
+      createStars();
+    });
 
-/* ---------- copy email ---------- */
-const toast=document.getElementById('toast');
-function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1900);}
-document.getElementById('copyBtn').addEventListener('click',async()=>{
-  try{await navigator.clipboard.writeText('carolinecarren22@gmail.com');showToast('Email address copied.');}
-  catch{showToast('Copy failed — carolinecarren22@gmail.com');}
-});
+    const typingTexts = [
+      'Artificial Intelligence Enthusiast',
+      'Computer Vision Learner',
+      'System Analyst & QA Learner',
+      'Internship-Ready Informatics Student'
+    ];
+    const typingEl = qs('#typingText');
+    let typingIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    function typeLoop(){
+      const current = typingTexts[typingIndex];
+      typingEl.textContent = current.slice(0, charIndex) + '|';
+      if(!isDeleting){
+        charIndex++;
+        if(charIndex > current.length){
+          isDeleting = true;
+          setTimeout(typeLoop, 1100);
+          return;
+        }
+      }else{
+        charIndex--;
+        if(charIndex === 0){
+          isDeleting = false;
+          typingIndex = (typingIndex + 1) % typingTexts.length;
+        }
+      }
+      setTimeout(typeLoop, isDeleting ? 38 : 78);
+    }
 
-/* ---------- reveal on scroll ---------- */
-const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('show');revealObs.unobserve(en.target);}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+    function animateCounters(){
+      qsa('[data-count]').forEach(counter => {
+        const target = Number(counter.dataset.count);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 28));
+        function update(){
+          current += step;
+          if(current >= target) counter.textContent = target;
+          else{
+            counter.textContent = current;
+            requestAnimationFrame(update);
+          }
+        }
+        update();
+      });
+    }
 
-/* ---------- animated counters ---------- */
-const counterObs=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting)return;
-    const el=en.target,target=parseFloat(el.dataset.target),dec=parseInt(el.dataset.decimal||'0',10);
-    let cur=0;const step=target/45;
-    const t=setInterval(()=>{
-      cur+=step;
-      if(cur>=target){cur=target;clearInterval(t);}
-      el.textContent=cur.toFixed(dec);
-    },22);
-    counterObs.unobserve(el);
-  });
-},{threshold:.5});
-document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
-</script>
+    function animateSkills(){
+      qsa('.skill-fill').forEach(fill => {
+        fill.style.width = fill.dataset.width;
+      });
+    }
+
+    const profilePhoto = qs('#profilePhoto');
+    const photoSources = ['profile.jpg.png', 'profile.jpg', 'profile.png', 'profile.jpeg'];
+    let photoIndex = 0;
+
+    function tryLoadProfilePhoto(){
+      profilePhoto.classList.remove('hide');
+      profilePhoto.src = photoSources[photoIndex];
+    }
+
+    profilePhoto.addEventListener('error', () => {
+      photoIndex++;
+      if(photoIndex < photoSources.length){
+        profilePhoto.src = photoSources[photoIndex];
+      }else{
+        profilePhoto.classList.add('hide');
+      }
+    });
+
+    profilePhoto.addEventListener('load', () => {
+      profilePhoto.classList.remove('hide');
+    });
+
+    qsa('[data-tab]').forEach(button => {
+      button.addEventListener('click', () => {
+        qsa('[data-tab]').forEach(btn => btn.classList.remove('active'));
+        qsa('.panel').forEach(panel => panel.classList.remove('active'));
+        button.classList.add('active');
+        qs('#' + button.dataset.tab).classList.add('active');
+      });
+    });
+
+    qsa('[data-skill-tab]').forEach(button => {
+      button.addEventListener('click', () => {
+        qsa('[data-skill-tab]').forEach(btn => btn.classList.remove('active'));
+        qsa('.skill-panel').forEach(panel => panel.classList.remove('active'));
+        button.classList.add('active');
+        qs('#' + button.dataset.skillTab).classList.add('active');
+        setTimeout(animateSkills, 80);
+      });
+    });
+
+    qsa('[data-exp-filter]').forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.expFilter;
+        qsa('[data-exp-filter]').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        qsa('.exp-item').forEach(item => {
+          item.classList.toggle('hide', filter !== 'all' && !item.dataset.exp.includes(filter));
+        });
+      });
+    });
+
+    const projectSearch = qs('#projectSearch');
+    let activeProjectFilter = 'all';
+    function filterProjects(){
+      const keyword = projectSearch.value.toLowerCase().trim();
+      qsa('.project-card').forEach(card => {
+        const matchKeyword = card.dataset.project.includes(keyword);
+        const matchCategory = activeProjectFilter === 'all' || card.dataset.category.includes(activeProjectFilter);
+        card.classList.toggle('hide', !(matchKeyword && matchCategory));
+      });
+    }
+    qsa('[data-project-filter]').forEach(button => {
+      button.addEventListener('click', () => {
+        activeProjectFilter = button.dataset.projectFilter;
+        qsa('[data-project-filter]').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        filterProjects();
+      });
+    });
+    projectSearch.addEventListener('input', filterProjects);
+
+    const certSearch = qs('#certSearch');
+    certSearch.addEventListener('input', () => {
+      const keyword = certSearch.value.toLowerCase().trim();
+      qsa('.cert-card').forEach(card => {
+        card.classList.toggle('hide', !card.dataset.cert.includes(keyword));
+      });
+    });
+
+    const projectModal = qs('#projectModal');
+    const modalTitle = qs('#modalTitle');
+    const modalDesc = qs('#modalDesc');
+    qsa('.project-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modalTitle.textContent = card.dataset.title;
+        modalDesc.textContent = card.dataset.desc;
+        projectModal.classList.add('show');
+      });
+    });
+    qs('#closeModal').addEventListener('click', () => projectModal.classList.remove('show'));
+    projectModal.addEventListener('click', (e) => {
+      if(e.target === projectModal) projectModal.classList.remove('show');
+    });
+
+    const toast = qs('#toast');
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    qs('#copyEmail').addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText('carolinecarren22@gmail.com');
+        showToast('Email copied to clipboard.');
+      }catch{
+        showToast('Email: carolinecarren22@gmail.com');
+      }
+    });
+
+
+    const revealEls = qsa('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, {threshold:.14});
+    revealEls.forEach(el => observer.observe(el));
+
+    const scrollTop = qs('#scrollTop');
+    const scrollProgress = qs('#scrollProgress');
+    const sections = qsa('section[id]');
+    const navLinks = qsa('.nav-menu a');
+
+    function updateScrollUI(){
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      scrollProgress.style.width = progress + '%';
+
+      scrollTop.classList.toggle('show', window.scrollY > 320);
+
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 150;
+        if(window.scrollY >= top) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', updateScrollUI);
+    scrollTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    window.addEventListener('load', () => {
+      tryLoadProfilePhoto();
+      typeLoop();
+      animateCounters();
+      animateSkills();
+      updateScrollUI();
+    });
+  </script>
 </body>
 </html>
